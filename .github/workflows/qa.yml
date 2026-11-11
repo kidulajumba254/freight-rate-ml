@@ -1,0 +1,36 @@
+name: Project QA
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate-predictions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Validate predictions and generate chart
+        run: >-
+          python score.py
+          --predictions validation_predictions.csv
+          --december-predictions december-chart-inputs.csv
+
+      - name: Upload December chart
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-december-chart
+          path: scorer_results/candidate_december.png
