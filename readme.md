@@ -108,9 +108,6 @@ python run_all.py
 - `validation_predictions.csv`: 12,000 load predictions
 - `december-chart-inputs.csv`: 31 December predictions with predicted_rate column
 
-## Assessment Report
-
-See `ASSESSMENT_REPORT.md` for detailed methodology, performance analysis, and feature importance.
 
 ## Requirements
 
